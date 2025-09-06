@@ -213,7 +213,10 @@
               <h3>Send Us a Message</h3>
               <p>Lorem ipsum dolor sit amet consectetur adipiscing elit mauris hendrerit faucibus imperdiet nec eget felis.</p>
 
-              <form action="forms/contact.php" method="post" class="php-email-form">
+              <form method="post">
+
+                  {% csrf_token %}
+
                 <div class="form-floating mb-3">
                   <input type="text" class="form-control" id="nameInput" name="name" placeholder="Full Name" required="">
                   <label for="nameInput">Full Name</label>

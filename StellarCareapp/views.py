@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from StellarCareapp.models import *
 
 # Create your views here.
@@ -9,10 +9,33 @@ def about(request):
     return render(request,'about.html')
 
 def appointment(request):
-    return render(request,'appointment.html')
+    if request.method == 'POST':
+        myappointment = Appoint(
+            name=request.POST["name"],
+            email=request.POST["email"],
+            phone=request.POST["phone"],
+            department=request.POST["department"],
+            date=request.POST["date"],
+            doctor=request.POST["doctor"],
+            message=request.POST["message"],
+        )
+        myappointment.save()
+        return redirect('/')
+    else:
+         return render(request,'appointment.html')
 
 def contact(request):
-    return render(request,'contact.html')
+    if request.method == 'POST':
+        mycontact = Contact(
+            name = request.POST["name"],
+            email = request.POST["email"],
+            subject = request.POST["subject"],
+            message = request.POST["message"],
+        )
+        mycontact.save()
+        return redirect('/')
+    else:
+         return render(request,'contact.html')
 
 def department(request):
     return render(request,'department-details.html')
